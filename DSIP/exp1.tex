@@ -1,8 +1,15 @@
 \documentclass{article}
 \usepackage[margin=2cm]{geometry}
+\usepackage{graphicx}
 \usepackage{multicol}
+\usepackage{url}
+
+\graphicspath{./}
 \setlength{\columnsep}{1cm}
-  
+\newenvironment{Figure}
+ {\par\medskip\noindent{\linewidth}}
+ {\endminipage\par\medskip}
+
 \begin{document}
    \title{Case Study on DSIP and it's application.}                           
     \author{Rishabh Bhatnagar}
@@ -10,10 +17,23 @@
     \tableofcontents
     \newpage
 
+    \begin{thebibliography}{9}
+    \bibitem{tpSignal} https://www.tutorialspoint.com/digital\_signal\_processing/dsp\_signals\_definition.htm
+    \bibitem{wikiAnalog} https://en.wikipedia.org/wiki/Analog\_signal
+    \end{thebibliography}
+    
     \begin{multicols}{2}
     \section{Signal Definition}
+    Anything that carries information can be called as signal. It can also be defined as a physical quantity that varies with time, temperature, pressure or with any independent variables such as speech signal or video signal. The process of operation in which the characteristics of a signal (Amplitude, shape, phase, frequency, etc.) undergoes a change is known as signal processing. 
+    \cite{tpSignal}
     \section{Types of Signal}
         \subsection{Analog Signal}
+        An analog signal is any continuous signal for which the time-varying feature (variable) of the signal is a representation of some other time varying quantity, i.e., analogous to another time varying signal. For example, in an analog audio signal, the instantaneous voltage of the signal varies continuously with the pressure of the sound waves.\cite{wikiAnalog}
+        \begin{Figure}
+         \centering
+          \includegraphics[width=\linewidth]{analogSignals}
+           \captionof{figure}{my caption of the figure}
+           \end{Figure}
         \subsection{Digital Signal}
         \subsection{Discrete Signal}
     \section{Types of Discrete Time Signal}
@@ -43,8 +63,5 @@
         \subsection{Disadvantages of IP} 
     \section{DSP vs Microprocessor}
     \end{multicols}
-    \cite{latexcompanion}
 
-    \begin{thebibliography}
-    \end{thebibliography}
 \end{document}
