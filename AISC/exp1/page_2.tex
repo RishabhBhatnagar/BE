@@ -1,0 +1,149 @@
+\documentclass{article}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{microtype}
+\title{\textbf{Family Tree}}
+\author{Rishabh Bhatnagar}
+\date{July 15}
+ 
+\begin{document}
+    \begin{titlepage}
+        \maketitle
+
+        \section{CODE:}
+        \begin{verbatim}
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        male(aditya).
+        male(rishabh).
+
+        male(dhruv).
+        male(anurag).
+
+        male(sushil).
+        male(kshitij).
+        male(ritesh).
+        male(kharagsingh).
+        male(vipin).
+
+        female(ankita).
+        female(neha).
+        female(khyati).
+        female(ritu).
+        female(mahima).
+        female(abha).
+        female(shantidevi).
+        female(kantidevi).
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        wife(ritu, sushil).
+        wife(mahima, ritesh).
+        wife(abha, kshitij).
+        wife(kantidevi, kharagsingh).
+        wife(shantidevi, vipin).
+
+        mother(ritu, aditya).
+        mother(ritu, rishabh).
+        mother(abha, neha).
+        mother(mahima, dhruv).
+        mother(abha, anurag).
+        mother(shantidevi, sushil).
+        mother(shantidevi, kshitij).
+        mother(kantidevi, ritu).
+        mother(kantidevi, ritesh).
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        % Rules %
+        husband(A, B)       :- wife(B, A), male(A).
+        married(A, B)       :- wife(A, B).
+        married(A, B)       :- husband(A,B).
+        child(A, B)         :- husband(B, C), mother(C, A).
+        child(A, B)         :- mother(B, A).
+        son(A, B)           :- child(A, B), male(A).
+        daughter(A, B)      :- child(A, B), female(A).
+        parent(A, B)        :- mother(A, B).
+        parent(A, B)        :- father(A, B).
+        father(A, B)        :- child(B, A), mother(C, B), wife(C, A).
+        brother(A, B)       :- mother(C, A), mother(C, B), male(A).
+        sister(A, B)        :- mother(C, A), mother(C, B), female(A).
+        grandparent(A, B)   :- parent(C, B), parent(A, C).
+        grandfather(A, B)   :- grandparent(A, B), male(A).
+        grandmother(A, B)   :- grandparent(A, B), female(A).
+        grandson(A, B)      :- granparent(B, A), male(A).
+        granddaughter(A, B) :- grandparent(B, A), female(A).
+        sibling(A, B)       :- parent(C, A), brother(C, D), child(B, D).
+        sibling(A, B)       :- parent(C, A), sister(C, D), child(B, D).
+        \end{verbatim}
+
+        \section{\textbf{\textit{OUTPUT}}}
+        \begin{verbatim}
+            rishabh@rishabh:~/Desktop/BE/AISC/exp1\$ prolog
+            GNU Prolog 1.3.0
+            By Daniel Diaz
+            Copyright (C) 1999-2007 Daniel Diaz
+            | ?- [exp1_family_tree].
+            compiling /home/rishabh/Desktop/BE/AISC/exp1/exp1_family_tree.pl for byte code...
+            /home/rishabh/Desktop/BE/AISC/exp1/exp1_family_tree.pl compiled, 59 lines read 
+            - 7776 bytes written, 9 ms
+
+            yes
+            | ?- father(sushil, aditya).
+
+            true ? 
+
+            yes
+            | ?- son(rishabh, sushil).
+
+            true ? 
+
+            yes
+            | ?- brother(rishabh, aditya).
+
+            true ? 
+
+            yes
+            | ?- sibling(neha, rishabh).
+
+            true ? 
+
+            yes
+            | ?- sister(ritu, abha)
+            .
+
+            no
+            | ?- grandparent(kharagsingh, rishabh).
+
+            true ? 
+
+            yes
+            | ?- married(mahima, ritesh).
+
+            true ? 
+
+            yes
+            | ?- male(shantidevi), male(abha)
+            .
+
+            no
+            | ?- %% inexistent data query %%
+            .
+            .
+            uncaught exception: error(syntax_error('user_input:13 
+                    (char:1) expression expected'),read_term/3)
+            | ?- male(hacker).
+
+            no
+            | ?- mother(mahima, dhruv), father(ritesh, dhruv).
+
+            true ? 
+
+            (4 ms) yes
+            | ?- married(mahima, ritesh).
+
+            true ? 
+
+            yes
+            | ?- sibling(rishabh, anurag).
+
+            true ? 
+        \end{verbatim}
+    \end{titlepage}
+\end{document}
+
