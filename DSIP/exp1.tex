@@ -1,14 +1,28 @@
 \documentclass{article}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Package Imports%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[margin=2cm]{geometry}
 \usepackage{graphicx}
 \usepackage{multicol}
 \usepackage{url}
+\usepackage{float}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Initial Settings%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \graphicspath{./}
 \setlength{\columnsep}{1cm}
-\newenvironment{Figure}
- {\par\medskip\noindent{\linewidth}}
- {\endminipage\par\medskip}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Custom Commands%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\addImage}[5]{
+    \begin{figure}[#1]
+        \centering
+        \includegraphics[width=#2]{#3}
+        \caption{#4}
+        \label{fig:#5}
+    \end{figure}
+}
 
 \begin{document}
    \title{Case Study on DSIP and it's application.}                           
@@ -17,44 +31,162 @@
     \tableofcontents
     \newpage
 
-    \begin{thebibliography}{9}
-    \bibitem{tpSignal} https://www.tutorialspoint.com/digital\_signal\_processing/dsp\_signals\_definition.htm
-    \bibitem{wikiAnalog} https://en.wikipedia.org/wiki/Analog\_signal
-    \end{thebibliography}
-    
-    \begin{multicols}{2}
+    \begin{multicols}{2}                % two columns
+
     \section{Signal Definition}
-    Anything that carries information can be called as signal. It can also be defined as a physical quantity that varies with time, temperature, pressure or with any independent variables such as speech signal or video signal. The process of operation in which the characteristics of a signal (Amplitude, shape, phase, frequency, etc.) undergoes a change is known as signal processing. 
-    \cite{tpSignal}
+        Anything that carries information can be called as signal. 
+        It can also be defined as a physical quantity that varies with time, 
+        temperature, pressure or with any independent variables such as 
+        speech signal or video signal. The process of operation in which the 
+        characteristics of a signal (Amplitude, shape, phase, frequency, etc.) 
+        undergoes a change is known as signal processing. 
+        \cite{tpSignal}
+
     \section{Types of Signal}
         \subsection{Analog Signal}
-        An analog signal is any continuous signal for which the time-varying feature (variable) of the signal is a representation of some other time varying quantity, i.e., analogous to another time varying signal. For example, in an analog audio signal, the instantaneous voltage of the signal varies continuously with the pressure of the sound waves.\cite{wikiAnalog}
-        \begin{Figure}
-         \centering
-          \includegraphics[width=\linewidth]{analogSignals}
-           \captionof{figure}{my caption of the figure}
-           \end{Figure}
+            An analog signal is any continuous signal for which the 
+            time-varying feature (variable) of the signal is a representation 
+            of some other time varying quantity, i.e., analogous to another 
+            time varying signal. For example, in an analog audio signal, the 
+            instantaneous voltage of the signal varies continuously with the 
+            pressure of the sound waves.
+            \cite{wikiAnalog}
+        \addImage{H}{6cm}{analogSignal.jpeg}{Analog Signal}{analog signal}
         \subsection{Digital Signal}
+            A digital signal refers to an electrical signal that is converted 
+            into a pattern of bits. Unlike an analog signal, which is a 
+            continuous signal that contains time-varying quantities, a digital 
+            signal has a discrete value at each sampling point. The precision 
+            of the signal is determined by how many samples are recorded per 
+            unit of time. For example, the illustration below shows an analog 
+            pattern (represented as the curve) alongside a digital pattern 
+            (represented as the discrete lines). 
+            \cite{digitalSignalDefn}
+        \addImage{H}{8cm}{digitalSignal.png}{Digital Signal \cite{digitalSignalImage}}{digital signal}
         \subsection{Discrete Signal}
+        A discrete signal or discrete-time signal is a time series consisting 
+        of a sequence of quantities. Unlike a continuous-time signal, a 
+        discrete-time signal is not a function of a continuous argument; 
+        however, it may have been obtained by sampling from a continuous-time 
+        signal. When a discrete-time signal is obtained by sampling a sequence 
+        at uniformly spaced times, it has an associated sampling rate.
+        \cite{wikiDiscrete}
+        \addImage{H}{7cm}{discreteSignal.png}{Discrete Signal \cite{wikiDiscrete}}{discrete signal}
+
     \section{Types of Discrete Time Signal}
         \subsection{Even and Odd Signal}
             \begin{enumerate}
                 \item Even Signal
+                \begin{enumerate}
+                    \item[] A signal is said to be \textit{Even Signal} if it follows the following property: \newline $$x(-t) = x(t)$$
+                \end{enumerate}
                 \item Odd Signal
+                \begin{enumerate}
+                    \item[] A signal is said to be \textit{Odd Signal} if it follows the following property: \newline $$x(-t) = -x(t)$$
+                \end{enumerate}
             \end{enumerate}
+        \addImage{H}{8cm}{evenOdd.png}{Even-Odd signal Component synthesization\cite{evenOddImage}}{evenodd-signal}
         \subsection{Periodic and Aperiodic Signal}
             \begin{enumerate}
                 \item Periodic Signal
                 \item Aperiodic Signal
             \end{enumerate}
-    \section{Energy and Signal}
+
+    \section{Energy and Power Signals}
         \begin{enumerate}
-            \item Energy Signal
+            \item Energy Signal\cite{energyPower}
+                \begin{enumerate}
+                    \item[] A signal which satisfies the following condition is  said to be energy signal.
+                        $$ E = \int\limits_{-\infty}^{\infty} \left|x(t)\right|^2$$
+                        Considering the energy in discrete time systems as:
+                        $$ E = \sum\limits_{-\infty}^{\infty} \left|x[n]\right|^2$$
+                \end{enumerate}
             \item Power Signal
+                \begin{enumerate}
+                    \item[] A signal which satisfies the following condition is  said to be power signal.
+                        $$P = \lim_{T\to\infty}\frac{1}{2T} \int\limits_{-T}^{T}\left|x(t)^2\right|$$
+                        Writing the power equation in discrete systems:
+                        $$P = \lim_{N\to\infty}\frac{1}{2N+1} \sum\limits_{-T}^{T}\left|x[n]^2\right|$$
+                \end{enumerate}
         \end{enumerate}
+
     \section{Block Diagram of DSP:}
-    \section{Applications of DSP}
-    \section{Applications of IP} 
+        \addImage{H}{10cm}{dspBlockDiagram.jpg}{DSP block diagram\cite{blockDiagramDSP}}{dspBlockDiagram}
+        \textbf{Description:} \newline
+        \begin{itemize}
+            \item ADC: an analog-to-digital converter is a system that 
+            converts an analog signal, such as a sound picked up by a 
+            microphone or light entering a digital camera, into a digital 
+            signal. An ADC may also provide an isolated measurement such as an 
+            electronic device that converts an input analog voltage or current 
+            to a digital number representing the magnitude of the voltage or 
+            current\cite{wikiADC}.
+            \item DAC:  a digital-to-analog converter (DAC, D/A, D2A, or D-to-A)
+            is a system that converts a digital signal into an analog signal. 
+            An analog-to-digital converter (ADC) performs the reverse function.
+            \cite{wikiDAC}
+        \end{itemize}
+    \section{Applications of DSP\cite(wikiAppDSP)}
+        Applications of DSP include audio signal processing, audio compression,
+        digital image processing, video compression, speech processing, speech 
+        recognition, etc.
+        \begin{enumerate}
+            \item Speech Processing: Speech processing is the study of speech 
+            signals and the processing methods of signals. The signals are 
+            usually processed in a digital representation, so speech processing
+            can be regarded as a special case of digital signal processing, 
+            applied to speech signals. Aspects of speech processing includes 
+            the acquisition, manipulation, storage, transfer and output of 
+            speech signals. The input is called speech recognition and the 
+            output is called speech synthesis. 
+            \cite{wikiSpeechProcessing}
+            \item Digital Image Processing: Digital Image Processing is the 
+            use of computer algorithms to perform image processing on digital 
+            images.[1] As a subcategory or field of digital signal processing, 
+            digital image processing has many advantages over analog image 
+            processing. It allows a much wider range of algorithms to be 
+            applied to the input data and can avoid problems such as the 
+            build-up of noise and signal distortion during processing. Since 
+            images are defined over two dimensions (perhaps more) digital 
+            image processing may be modeled in the form of multidimensional systems. 
+            Digital image processing allows the use of much more complex 
+            algorithms, and hence, can offer both more sophisticated 
+            performance at simple tasks, and the implementation of methods 
+            which would be impossible by analog means. \newline
+            In particular, digital image processing is the only practical 
+            technology for: \newline
+            \begin{itemize}
+                \item Classification
+                \item Feature extraction
+                \item Multi-scale signal analysis
+                \item  Pattern recognition
+                \item Projection
+            \end{itemize}
+        \end{enumerate}
+
+    \section{Applications of IP\cite{appIP}}
+        Some of the major fields in which digital image processing is widely 
+        used are mentioned below
+        \begin{itemize}
+            \item Image sharpening and restoration
+            \item Medical field
+            \item Remote sensing
+            \item Transmission and encoding
+            \item Machine/Robot vision
+            \item Color processing
+            \item Pattern recognition
+            \item Video processing
+            \item Microscopic Imaging
+        \end{itemize}
+        \textbf{Image sharpening and restoration}
+        \par
+        Image sharpening and restoration refers here to process images that 
+        have been captured from the modern camera to make them a better image 
+        or to manipulate those images in way to achieve desired result. It 
+        refers to do what Photoshop usually does. This includes Zooming, 
+        blurring , sharpening , gray scale to color conversion, detecting 
+        edges and vice versa , Image retrieval and Image recognition. The 
+        common examples are: 
     \section{Advantages and Limitations of DSP}
         \subsection{Advantages of DSP}
         \subsection{Limitation of DSP}
@@ -63,5 +195,22 @@
         \subsection{Disadvantages of IP} 
     \section{DSP vs Microprocessor}
     \end{multicols}
+
+    \begin{thebibliography}{9}
+    \bibitem{tpSignal} https://www.tutorialspoint.com/digital\_signal\_processing/dsp\_signals\_definition.htm
+    \bibitem{wikiAnalog} https://en.wikipedia.org/wiki/Analog\_signal
+    \bibitem{analogSignalImage} https://techdifferences.com/difference-between-analog-and-digital-signal.html
+    \bibitem{digitalSignalDefn} https://www.chegg.com/homework-help/definitions/digital-signal-4
+    \bibitem{digitalSignalImage} http://blogs.plymouth.ac.uk/embedded-systems/glossary-2/digital-signal-glossary-entry/
+    \bibitem{wikiDiscrete} https://en.wikipedia.org/wiki/Discrete\_time\_and\_continuous\_time
+    \bibitem{evenOddImage} http://www.songho.ca/dsp/signal/signals.html
+    \bibitem{energyPower} https://www.chegg.com/homework-help/definitions/energy-and-power-in-signals-4
+    \bibitem{blockdiagramDSP} https://slideplayer.com/slide/8916150/
+    \bibitem{wikiADC} https://en.wikipedia.org/wiki/Analog-to-digital\_converter
+    \bibitem{wikiDAC} https://en.wikipedia.org/wiki/Digital-to-analog\_converter
+    \bibitem{wikiAppDSP} https://en.wikipedia.org/wiki/Digital\_signal\_processing
+    \bibitem{wikiSpeechProcessing} https://en.wikipedia.org/wiki/Speech\_processing
+    \bibitem{appIP} https://www.tutorialspoint.com/dip/applications\_and\_usage
+    \end{thebibliography}
 
 \end{document}
