@@ -126,7 +126,7 @@
             An analog-to-digital converter (ADC) performs the reverse function.
             \cite{wikiDAC}
         \end{itemize}
-    \section{Applications of DSP\cite(wikiAppDSP)}
+    \section{Applications of DSP\cite{wikiAppDSP}}
         Applications of DSP include audio signal processing, audio compression,
         digital image processing, video compression, speech processing, speech 
         recognition, etc.
@@ -187,14 +187,56 @@
         blurring , sharpening , gray scale to color conversion, detecting 
         edges and vice versa , Image retrieval and Image recognition. The 
         common examples are: 
-    \section{Advantages and Limitations of DSP}
+    \section{Advantages and Limitations of DSP\cite{advDisadvDsp}}
         \subsection{Advantages of DSP}
-        \subsection{Limitation of DSP}
+            \begin{itemize}
+                \item In this digital circuits can be reproduced easily in large quantities at comparatively lower cost.
+                \item The digital circuits are less sensitive to tolerances of component values.
+                \item These are easily transported because the digital signals can be processed off line.
+                \item Digital signal processing operations can be changed by changing the program in digital programmable system.
+                \item It has a better control of accuracy in digital systems compared to analog systems.
+                \item Sophisticated signal processing algorithms can be implemented by DSP method.
+                \item Digital signals are easily stored on magnetic media such as magnetic tape without loss of quality of reproduction of signal.
+            \end{itemize}
+        \subsection{Limitations of DSP}
+            \begin{itemize}
+                \item The digital communications require a greater bandwidth than analogue to transmit the same information.
+                \item The detection of digital signals requires the communications system to be synchronized, whereas generally speaking this is not the case with analogue systems.
+            \end{itemize}
     \section{Advantages and Limitations of IP} 
-        \subsection{Advantages of IP} 
-        \subsection{Disadvantages of IP} 
-    \section{DSP vs Microprocessor}
+        \subsection{Advantages of IP}
+            \begin{itemize}
+                \item Digital image processing made digital image noise free .
+                \item It can be made available in any desired format. (X-rays, photo negatives, improved image, etc.) .
+                \item Digital imaging is the ability of the operator to post-process the image. It means manipulate the pixel shades to correct image density and contrast.
+                \item Images can be stored in the computer memory and easily retrieved on the same computer screen . 
+                \item Digital imaging allows the electronic transmission of images to third-party providers. 
+            \end{itemize}
+        \subsection{Disadvantages of IP}
+            \begin{itemize}
+                \item The initial cost can be high depending on the system used.
+                \item If computer crashes then pictures that have not been printed and filed into Book Albums are lost. 
+                \item Digital cameras which are used for digital image processing have some disadvantages like: 
+
+                \item Memory Card Problems 
+                \item Higher Cost 
+                \item More Battery Consumption 
+            \end{itemize}
     \end{multicols}
+
+    \section{DSP vs Microprocessor}
+        \begin{tabular}{ ||p{1cm}|p{4cm}|p{6cm}|p{6cm}||}
+            \hline
+            \textbf{Sr. No.}&\textbf{Parameters}&\textbf{DSP Processor}&\textbf{MicroProcessor}\\
+            \hline
+            1&Instruction cycle&Instructions are executed in single cycle of the clock&Multiple clocks cycles are required for execution of one instruction.\\\hline
+            2&Instruction execution&Parallel execution is possible.&Execution of instruction is always sequential.\\\hline
+            3&Memories&Separate data and program memory.&No such separate memories are present.\\\hline
+            4&On chip/Off chip memories&Program and Data memories are present on chip extendable off chip.&Normally on chip cache memory present, main memory is off chip.\\\hline
+            5&Program flow control&Program sequencer and instruction register take care of program flow&Program counter take care of flow of execution.\\\hline
+            6&Pipelining&Pipelining is implicate through instruction register and instruction cache.&Queuing is perform explicate by one queue register to support pipelining.\\
+            \hline
+        \end{tabular}
 
     \begin{thebibliography}{9}
     \bibitem{tpSignal} https://www.tutorialspoint.com/digital\_signal\_processing/dsp\_signals\_definition.htm
@@ -211,6 +253,7 @@
     \bibitem{wikiAppDSP} https://en.wikipedia.org/wiki/Digital\_signal\_processing
     \bibitem{wikiSpeechProcessing} https://en.wikipedia.org/wiki/Speech\_processing
     \bibitem{appIP} https://www.tutorialspoint.com/dip/applications\_and\_usage
+    \bibitem{advDisadvDsp} https://www.polytechnichub.com/advantages-disadvantages-digital-signal-processor-dsp/
     \end{thebibliography}
 
 \end{document}
