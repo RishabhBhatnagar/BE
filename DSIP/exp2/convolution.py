@@ -3,10 +3,6 @@ import operator
 from collections import deque
 
 
-def fold(seq):
-    return seq[::-1]
-
-
 def pad(seq, n, e=0):
     seq.extend(itertools.repeat(e, n - len(seq)))
     return seq
