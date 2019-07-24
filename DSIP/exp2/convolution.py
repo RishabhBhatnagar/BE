@@ -1,7 +1,41 @@
-linear_conv = lambda s1, s2: (lambda a, n1, n2: [sum([a[i * n2 + j] for i in range(n1) for j in range(n2) if i + j == s and i < n1 and j < n2]) for s in range(n1 + n2 - 1)])(*(lambda sn1, sn2:(list(__import__('itertools').starmap(__import__('operator').mul, __import__('itertools').product(sn1[0], sn2[0]))), sn1[1], sn2[1]))(*(lambda x, h: [*map(lambda x: (x, len(x)), [x, h])])(s1, s2))
-)
+import itertools
+import operator
+from collections import deque
 
-from itertools import islice, cycle
 
-circular_conv = lambda x, h: list(islice((lambda gen, div: (gen, islice(gen, div)))(cycle(x[::-1]), 5)[0], 4))
-print(circular_conv([1, 2, 3, 4], [2, 4, 5]))
+def fold(seq):
+    return seq[::-1]
+
+
+def pad(seq, n, e=0):
+    seq.extend(itertools.repeat(e, n - len(seq)))
+    return seq
+
+
+def linear_convolution(s1, s2):
+    # s1, s2 are the sequences with origin at 0th element.
+    # s1, s2 : unexhaustible iterable.
+    n1, n2 = map(len, [s1, s2])
+    x3 = list(itertools.repeat(0, n1 + n2 - 1))
+    p = tuple(itertools.starmap(operator.mul, itertools.product(s1, s2)))
+    for i in range(n1):
+        for j in range(n2):
+            x3[i + j] += p[n2 * i + j]
+    return x3
+
+
+def circular_convolution(s1, s2):
+    n = max(map(len, [s1, s2]))
+    s1, s2 = pad(s1, n), pad(s2, n)
+    matrix = []
+    q = deque(s1[::-1])
+    for _ in itertools.repeat(None, n):
+        q.rotate(1)
+        matrix.append(list(q))
+    return [sum(itertools.starmap(operator.mul, zip(row, s2))) for row in matrix]
+
+def linear_circular(s1, s2):
+    n = sum(map(len, [s1, s2])) - 1
+    s1, s2 = pad(s1, n), pad(s2, n)
+    return circular_convolution(s1, s2)
+
