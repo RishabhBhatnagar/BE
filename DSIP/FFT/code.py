@@ -21,3 +21,8 @@ def fft(x):
         w = w * w_n
     return ans
 
+
+def ifft(x):
+    return []
+
+print(fft(list(map(int, input().split()))))
