@@ -1,0 +1,48 @@
+package com.example.dsloginapp;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText userName, pswd;
+    int triesLeft = 3;
+    TextView maxTry;
+    Button submitButton;
+    private final String CORRECT_UNAME = "RishabhBhatnagar";
+    private final String CORRECT_PSWD = "fenwick";
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        submitButton = findViewById(R.id.submit);
+        userName = findViewById(R.id.username);
+        pswd = findViewById(R.id.pswd);
+        maxTry = findViewById(R.id.tries_left);
+        maxTry.setText(String.valueOf(triesLeft));
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String uname = userName.getText().toString();
+                String password = pswd.getText().toString();
+                if(uname.equals(CORRECT_UNAME) && password.equals(CORRECT_PSWD))
+                    Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                else {
+                    if(triesLeft < 2){
+                        Toast.makeText(MainActivity.this, "No more tries left, relaunch the application and try again.", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                    else
+                    maxTry.setText(String.valueOf(--triesLeft));
+                }
+            }
+        });
+    }
+}
