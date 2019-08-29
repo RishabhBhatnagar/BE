@@ -188,7 +188,7 @@ def BUG2(graph, q_start, q_goal, obstacle=O, goal=G, void=V):
 
 
 if __name__ == '__main__':
-	graph = [
+    graph = [
 	    V, V, V, V, V, V, V,
 	    V, V, V, V, V, V, V,
 	    V, V, O, O, V, V, V,
@@ -197,17 +197,18 @@ if __name__ == '__main__':
 	    V, V, V, O, O, V, V,
 	    V, V, V, V, V, V, V,
 	    V, V, V, V, V, V, G
-	]
+    ]
 
-	n = 7
-	m = len(graph) // n
-	if n * m != len(graph):
-	    raise ValueError("dimensions doesn't match, graph must be a rectangular matrix.")
+    n = 7
+    m = len(graph) // n
+    if n * m != len(graph):
+        raise ValueError("dimensions doesn't match, graph must be a rectangular matrix.")
 
-	g = Graph(graph, m, n)
-	i = graph.index(G)
-	path_bug1 = BUG1(g, Point(0, 0), Point(*divmod(i, n)))
-	path_bug2 = BUG2(g, Point(0, 0), Point(*divmod(i, n)))
-	animate_grid(g, m, n, path_bug1, "BUG1 algorithm")
-	time.sleep(3)
-	animate_grid(g, m, n, path_bug2, "BUG2 algorithm")
+    g = Graph(graph, m, n)
+    i = graph.index(G)
+    path_bug1 = BUG1(g, Point(0, 0), Point(*divmod(i, n)))
+    path_bug2 = BUG2(g, Point(0, 0), Point(*divmod(i, n)))
+    print("BUG2 path:", path_bug2)
+    animate_grid(g, m, n, path_bug1, "BUG1 algorithm", 100)
+    time.sleep(3)
+    animate_grid(g, m, n, path_bug2, "BUG2 algorithm", 1)

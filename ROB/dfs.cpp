@@ -76,3 +76,14 @@ int main(void){
     cout << endl;
     return 0;
 }
+
+/*
+OUTPUT:
+Initial Graph:
+1 1 X X X 
+X 1 X G X 
+X 1 X 1 X 
+X 1 1 1 X 
+
+Path found: (0, 0) -> (0, 1) -> (1, 1) -> (2, 1) -> (3, 1) -> (3, 2) -> (3, 3) -> (2, 3)
+*/
