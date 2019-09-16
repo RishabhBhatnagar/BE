@@ -58,5 +58,5 @@ n = len(matrix)
 h = [0, 3, 1, 3, 1, 2, 4]
 
 nodes = matrix_to_nodes(matrix, h, n)
-print(algo(nodes))
+print("Optimised Path in the given Graph:", algo(nodes))
 
