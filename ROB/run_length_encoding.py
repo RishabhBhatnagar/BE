@@ -17,4 +17,7 @@ def algo(arr):
 if __name__ == '__main__':
     ip = tuple(map(int, input('enter the ip sequence(without spaces): ')))
     op = algo(ip)
+
     print('output sequence:', op)
+    print('original space requirement:', len(ip) * 8)
+    print('space requirement of output:', len(op) * 8)
