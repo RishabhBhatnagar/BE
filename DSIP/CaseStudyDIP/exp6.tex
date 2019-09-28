@@ -7,6 +7,7 @@
 \usepackage{multicol}
 \usepackage{url}
 \usepackage{float}
+\usepackage{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%Initial Settings%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \graphicspath{./}
@@ -112,55 +113,59 @@
                 \end{itemize}
 
         \section{Digital Image Processing system Block Diagram and Explanation}
-        \section{Applications of IP}
-        \section{Explain any 1 Application in Detail}
-        \section{Explain Different Image file format}
-
-
-
-
-
-
-
-
-
-
-        \begin{enumerate}
-                \item Even Signal
-                \begin{enumerate}
-                    \item[] A signal is said to be \textit{Even Signal} if it follows the following property: \newline $$x(-t) = x(t)$$
-                \end{enumerate}
-                \item Odd Signal
-                \begin{enumerate}
-                    \item[] A signal is said to be \textit{Odd Signal} if it follows the following property: \newline $$x(-t) = -x(t)$$
-                \end{enumerate}
-            \end{enumerate}
+        \addImage{H}{10cm}{DIPSteps.jpg}{Steps in DIP}{steps in DIP}
+        \begin{enumerate}[(i)]
+            \item \textbf{\underline{Image Acquisition :}} This is the first step or process of the fundamental steps of digital image processing. Image acquisition could be as simple as being given an image that is already in digital form. Generally, the image acquisition stage involves preprocessing, such as scaling etc.
+            \item \textbf{\underline{Image Enhancement :}} Image enhancement is among the simplest and most appealing areas of digital image processing. Basically, the idea behind enhancement techniques is to bring out detail that is obscured, or simply to highlight certain features of interest in an image. Such as, changing brightness & contrast etc.
+            \item \textbf{\underline{Image Restoration :}} Image restoration is an area that also deals with improving the appearance of an image. However, unlike enhancement, which is subjective, image restoration is objective, in the sense that restoration techniques tend to be based on mathematical or probabilistic models of image degradation.
+            \item \textbf{\underline{Color Image Processing :}} Color image processing is an area that has been gaining its importance because of the significant increase in the use of digital images over the Internet. This may include color modeling and processing in a digital domain etc.
+            \item \textbf{\underline{Wavelets and Multiresolution Processing :}} Wavelets are the foundation for representing images in various degrees of resolution. Images subdivision successively into smaller regions for data compression and for pyramidal representation.
+            \item \textbf{\underline{Compression :}} Compression deals with techniques for reducing the storage required to save an image or the bandwidth to transmit it. Particularly in the uses of internet it is very much necessary to compress data.
+            \item \textbf{\underline{Morphological Processing :}} Morphological processing deals with tools for extracting image components that are useful in the representation and description of shape.
+            \item \textbf{\underline{Segmentation :}} Segmentation procedures partition an image into its constituent parts or objects. In general, autonomous segmentation is one of the most difficult tasks in digital image processing. A rugged segmentation procedure brings the process a long way toward successful solution of imaging problems that require objects to be identified individually.
+            \item \textbf{\underline{Representation and Description :}} Representation and description almost always follow the output of a segmentation stage, which usually is raw pixel data, constituting either the boundary of a region or all the points in the region itself. Choosing a representation is only part of the solution for transforming raw data into a form suitable for subsequent computer processing. Description deals with extracting attributes that result in some quantitative information of interest or are basic for differentiating one class of objects from another.
+            \item \textbf{\underline{Object recognition :}} Recognition is the process that assigns a label, such as,  “vehicle” to an object based on its descriptors.
+            \item \textbf{\underline{Knowledge Base :}} Knowledge may be as simple as detailing regions of an image where the information of interest is known to be located, thus limiting the search that has to be conducted in seeking that information. The knowledge base also can be quite complex, such as an interrelated list of all major possible defects in a materials inspection problem or an image database containing high-resolution satellite images of a region in connection with change-detection applications.
+        \end{enumerate}
         
-    \end{multicols}
+        \section{Applications of IP}
+            \begin{enumerate}[i]
+                \item Image sharpening and restoration
+                \item Medical field
+                \item Remote sensing
+                \item Transmission and encoding
+                \item Machine/Robot vision
+                \item Color processing
+                \item Pattern recognition
+                \item Video processing
+                \item Microscopic Imaging
+            \end{enumerate}
+        \section{Application of IP in Robotics}
+            \subsection{Hurdle detection}
+                Hurdle detection is one of the common task that has been done through image processing, by identifying different type of objects in the image and then calculating the distance between robot and hurdles.
+                \addImage{H}{8cm}{hurdle.jpg}{Hurdle Detection}{Hurdle Detection}
+            \subsection{Line Follower Robot}
+                Most of the robots today work by following the line and thus are called line follower robots. This help a robot to move on its path and perform some tasks. This has also been achieved through image processing.
+                \addImage{H}{8cm}{lineFollower.jpg}{Line Follower}{line Follower}
+        
+        
+        \section{Explain Different Image file format}
+            \begin{itemize} 
+                \item \textbf{BMP:} Short for "Bitmap" .It can be pronounced as "bump," "B-M-P," or simply a "bitmap image." The BMP format is a commonly used raster graphic format for saving image files. It was introduced on the Windows platform, but is now recognized by many programs on both Macs and PCs.The BMP format stores color data for each pixel in the image without any compression. For example, a 10x10 pixel BMP image will include color data for 100 pixels. This method of storing image information allows for crisp, high-quality graphics, but also produces large file sizes. The JPEG and GIF formats are also bitmaps, but use image compression algorithms that can significantly decrease their file size. For this reason, JPEG and GIF images are used on the Web, while BMP images are often used for printable images.
 
-    \section{DSP vs Microprocessor}
-        \begin{tabular}{ ||p{1cm}|p{4cm}|p{6cm}|p{6cm}||}
-            \hline
-            \textbf{Sr. No.}&\textbf{Parameters}&\textbf{DSP Processor}&\textbf{MicroProcessor}\\
-            \hline
-            1&Instruction cycle&Instructions are executed in single cycle of the clock&Multiple clocks cycles are required for execution of one instruction.\\\hline
-            2&Instruction execution&Parallel execution is possible.&Execution of instruction is always sequential.\\\hline
-            3&Memories&Separate data and program memory.&No such separate memories are present.\\\hline
-            4&On chip/Off chip memories&Program and Data memories are present on chip extendable off chip.&Normally on chip cache memory present, main memory is off chip.\\\hline
-            5&Program flow control&Program sequencer and instruction register take care of program flow&Program counter take care of flow of execution.\\\hline
-            6&Pipelining&Pipelining is implicate through instruction register and instruction cache.&Queuing is perform explicate by one queue register to support pipelining.\\
-            \hline
-        \end{tabular}
+                \item \textbf{TIFF}: Also known as TIF, file types ending in .tif. TIFF stands for Tagged Image File Format. TIFF images create very large file sizes. TIFF images are uncompressed and thus contain a lot of detailed image data (which is why the files are so big) TIFFs are also extremely flexible in terms of color (they can be grayscale, or CMYK for print, or RGB for web) and content (layers, image tags).TIFF is the most common file type used in photo software (such as Photoshop), as well as page layout software (such as Quark and InDesign), again because a TIFF contains a lot of image data.
 
-    \begin{thebibliography}{9}
+                \item \textbf{JPEG}: Also known as JPG, file types ending in .jpg. JPEG stands for Joint Photographic Experts Group, which created this standard for this type of image formatting. JPEG files are images that have been compressed to store a lot of information in a small-size file. Most digital cameras store photos in JPEG format, because then you can take more photos on one camera card than you can with other formats. A JPEG is compressed in a way that loses some of the image detail during the compression in order to make the file small (and thus called “lossy” compression).JPEG files are usually used for photographs on the web, because they create a small file that is easily loaded on a web page and also looks good.JPEG files are bad for line drawings or logos or graphics, as the compression makes them look “bitmappy” (jagged lines instead of straight ones).
+            \end{itemize}
+    \begin{thebibliography}{7}
 	\bibitem{imageEncyclopedia} https://www.encyclopedia.com/computing/news-wires-white-papers-and-books/digital-images
 	\bibitem{imageWiki} https://www.encyclopedia.com/computing/news-wires-white-papers-and-books/digital-images
 	\bibitem{buzztech} https://buzztech.in/image-acquisition-in-digital-image-processing/
-	    \bibtem{buzztechImage} https://buzztech.in/wp-content/uploads/2017/12/Screen-Shot-2017-12-16-at-8.18.49-AM.png
+	\bibtem{buzztechImage} https://buzztech.in/wp-content/uploads/2017/12/Screen-Shot-2017-12-16-at-8.18.49-AM.png
     \bibitem{intext} D. Sugimura, T. Mikami, H. Yamashita, and T.Hamamoto, “Enhancing Color Images of Extremely Low Light Scenes Based on RGB/NIR Images Acquisition With Different Exposure Times”, IEEE TRANSACTIONS ON IMAGE PROCESSING, VOL. 24, NO. 11, NOVEMBER 2015.
-    \bibitem{acqPaper} https://www.researchgate.net/publication/318500799_Image_Acquisition_and_Techniques_to_Perform_Image_Acquisition
+    \bibitem{acqPaper} https://www.researchgate.net/publication/318500799-Image-Acquisition-and-Techniques-to-Perform-Image-Acquisition
     \bibitem{sisu} https://sisu.ut.ee/imageprocessing/book/1
     
     \end{thebibliography}
-
+    \end{multicols}
 \end{document}
