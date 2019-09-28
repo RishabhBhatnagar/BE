@@ -22,16 +22,22 @@ def smoothing(img, kernel=GUASSIAN_KERNEL):
 
 
 def sharpening(img, kernel=HIGH_PASS_KERNEL):
-    smooth_img = smoothing(img, LOW_PASS_KERNEL * 3)
+    smooth_img = smoothing(img, LOW_PASS_KERNEL)
     return img + 2 * (img - smooth_img)
 
 
 if __name__ == '__main__':
-    img1 = cv.imread('img.png', 0)
+    img1 = cv.imread('img.jpg', 0)
+    img2 = cv.imread('img.png', 0)
 
     op1 = smoothing(img1, kernel=(LOW_PASS_KERNEL))
-    op2 = sharpening(op1, kernel=HIGH_PASS_KERNEL)
-    cv.imshow('img1', img1)
-    cv.imshow('op2', op2)
+    op2 = sharpening(img2, kernel=HIGH_PASS_KERNEL)
+
+    cv.imshow('original image', img1)
+    cv.imshow('smoothened image', op1)
+    cv.waitKey(30000)
+    cv.imshow(3000)
+    cv.imshow('original image', img2)
+    cv.imshow('sharpened image', smoothing(sharpening(smoothing(op2))))
     cv.waitKey(3000)
 
