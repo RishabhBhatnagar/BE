@@ -1,7 +1,6 @@
 from functools import reduce
 
 
-
 Fn = 1 << 22  # globally(publically) available frame number.
 
 
@@ -11,6 +10,7 @@ def split_n(num, n):
     lh = ones & num
     rh = (num - lh) >> n
     return lh, rh
+
 
 
 def A3(rand, key):
@@ -25,4 +25,18 @@ def A3(rand, key):
 
  
 
-print(A3(340282366920938463463374607431768211456, 345282366920998463463374607431768211456))
+if __name__ == '__main__':
+    rand_no = 340282366920938463463374607431768211456
+    key = 345282366920998463463374607431768211456
+    print('Random Number:', rand_no)
+    print('Key:', key)
+    print('Output of A3 algorithm:', A3(rand_no, key))
+
+
+'''
+OUTPUT:
+Random Number: 340282366920938463463374607431768211456
+Key: 345282366920998463463374607431768211456
+Output of A3 algorithm: 3492679906
+'''
+
