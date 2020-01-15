@@ -2,42 +2,66 @@ package main
 
 
 import (
-    "os"
-    "net"
     "fmt"
-    "io/ioutil"
+    "net"
+    "bufio"
+    "os"
+    "strings"
+    "strconv"
 )
 
 
-func handleClient(conn *net.Conn){
-    fmt.Println("Connected to:", (*conn).RemoteAddr().String())
+var MOD = 1000007
+
+
+func fact(n int) int {
+    // writing the worst implementation of factorial number
+    // such that server takes lots of time per bigger requests of client.
+
+    // assuming number is a positive number
+    if n < 2 {
+        return 1
+    }
+    return ( n * fact(n - 1) ) % MOD
+}
+
+
+func fact_sum(n int) (sum int){
+    for i := 0; i <= n; i++ {
+        sum += fact(i) % MOD
+    }
+    return
+}
+
+
+func main() {
+    if len(os.Args) < 2 {
+        panic("Enter a four digit host number....")
+    }
+    host := os.Args[1]
+    listener, _ := net.Listen("tcp", ":" + host)
+    // infinite loop to accept all the connections.
     for {
-        clientData, err := ioutil.ReadAll(*conn)
+        conn, err := listener.Accept()
+        fmt.Println("Connection Received From:", conn.RemoteAddr().String())
         if err == nil {
-            fmt.Println("Data read from client:", clientData)
-            _, err = (*conn).Write([]byte("sent d messages"))
-            fmt.Println(err)
-        } else {
-            fmt.Println(err)
+            // anonymous function to handle client.
+            go func(c net.Conn){
+                addr := strings.Split(conn.RemoteAddr().String(), ":")[1]
+                // listen to all the data from client
+                for {
+                    // read new line from the client connection 
+                    numStr, err := bufio.NewReader(c).ReadString('\n')
+                    num, _ := strconv.Atoi(strings.TrimSuffix(numStr, "\n"))
+                    fmt.Println(fmt.Sprintf("%s :: Processing Request(n=%d)", addr, num))
+                    res := fact_sum(num)
+                    if err == nil {
+                        c.Write([]byte(fmt.Sprintf("Sum(fact(0..%d)) = %d\n", num, res)))
+                    }
+                    fmt.Println(fmt.Sprintf("%s :: End Req(n=%d)", addr, num))
+                }
+            }(conn)
         }
     }
 }
 
-
-func main(){
-    args := os.Args
-    if len(args) < 2 {
-        panic("Provide Port Number")
-    }
-    portNumber := args[1]
-    listener, err := net.Listen("tcp", ":" + portNumber)
-    if err != nil {
-        panic("Can't listen to the given port")
-    }
-    defer listener.Close()   // close listener after function exits.
-
-    for {
-        conn, _ := listener.Accept()
-        go handleClient(&conn)
-    }
-}

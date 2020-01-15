@@ -1,18 +1,32 @@
-#!/usr/bin/python3           # This is client.py file
-
 import socket
+import sys
+
 
 # create a socket object
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
 
-host = socket.gethostname()                           
+host = socket.gethostname()
 
-port = 1234
+try: # EAFP
+    port = int(sys.argv[1])
+except:
+    print("No valid port number given via cli, exitting....")
+    exit(1)
 
-s.connect((host, port))                               
+# connecting with the listening server.
+s.connect((host, port))
 
 # Receive no more than 1024 bytes
-msg = s.recv(1024)                                     
-
+while True:
+    num_str = input(">>> ")
+    if num_str.isdigit(): # LBYL
+        print("sending dat")
+        # sending the number to the server.
+        s.send(num_str.encode('utf8'))
+        print('sent')
+        # receiving the data from server.
+        print('receiving')
+        print(s.recv(1024))
+        print('wait for server to reply back')
 s.close()
 print (msg.decode('ascii'))

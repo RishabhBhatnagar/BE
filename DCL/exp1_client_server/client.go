@@ -1,38 +1,36 @@
 package main
 
+
 import (
-    "fmt"
-    "os"
     "bufio"
+    "fmt"
     "net"
-    "io/ioutil"
+    "os"
+    "strconv"
+    "strings"
 )
 
+
 func main(){
-    args := os.Args
-    if len(args) < 2 {
-        panic("No server address given. Provide ip:port of the server you want to listen to.")
+    if len(os.Args) < 2 {
+        panic("Required ip:host")
     }
-    address := args[1]
-    conn, err := net.Dial("tcp", address)
-    defer conn.Close()
-    if err != nil {
-        panic("Cannot connect to the network")
-    }
-    fmt.Println("Connected to server successfully.")
-    fmt.Println(conn)
+    socket := os.Args[1]
+    conn, _ := net.Dial("tcp", socket)
+    addr := strings.Split(conn.LocalAddr().String(), ":")[1]
+    fmt.Println("Current ID:", addr)
+    // client will ask for sum of all first n natural numbers mod 1000007.
+    var n int
     for {
-        reader := bufio.NewReader(os.Stdin)
-        fmt.Print(">>> ")                  // py style prompt
-        msg, _ := reader.ReadString('\n')  // read a newline
-        conn.Write([]byte(msg + "\n"))
-        fmt.Println("")
-        // wait until server doesn't send any data
-        received_msg, err := ioutil.ReadAll(conn)
+        fmt.Print(">>> ")
+        _, err := fmt.Scanf("%d\n", &n)
         if err == nil {
-            fmt.Println("<<<", string(received_msg))
-        } else {
-            fmt.Println(err)
+            // writing current data to server connection
+            conn.Write([]byte(strconv.Itoa(n) + "\n"))
+
+            // wait until server sends some message.
+            response, _ := bufio.NewReader(conn).ReadString('\n')
+            fmt.Print("<<< ", response)
         }
     }
 }
